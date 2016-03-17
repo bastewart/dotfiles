@@ -183,7 +183,7 @@ fi
 alias tat="tmux new-session -A -s main"
 
 # Open bash_profile and source after editing
-alias bash-profile="nano ~/.bash_profile && source ~/.bash_profile"
+alias bash-profile="vim $HOME/dotfiles/.bash_profile && source ~/.bash_profile"
 
 # Update passwords store
 alias pass-update='pass git remote update && pass git rebase origin/master'
@@ -191,7 +191,7 @@ alias pass-update='pass git remote update && pass git rebase origin/master'
 
 # ### MySQL aliases{{{
 alias mysql='mysql -p"$(cat $HOME/.mysql-passwd)"'
-alias mysql-root='mysql -u root -p"$(pass mysql/root)"'
+alias mysql-root='\mysql -u root -p"$(pass mysql/root)"'
 
 function ssl-mysql {
     \mysql -uroot -h$1 -p"$(cat $2)" --ssl-ca=$3 --ssl-verify-server-cert --port=3306
@@ -204,7 +204,7 @@ alias mysql-ca='ssl-mysql-aws "ca-production.cowdpj6qpfiw.us-east-1.rds.amazonaw
 
 # Update SQL privileges on SCLS1
 function code-set-privileges {
-    echo 'cd /home/bens/repositories/admin/admin && SQL_ROOT="$(cat ~/.mysql-root)" fab set_privileges'
+    echo 'cd $HOME/repositories/admin/admin && SQL_ROOT="$(cat ~/.mysql-root)" fab set_privileges'
 }
 alias mysql-set-privileges="ssh scls1 '$(code-set-privileges)'"
 
@@ -214,12 +214,6 @@ alias mysqldump-bens='mysqldump -u bens --set-gtid-purged=OFF -p"$(cat $HOME/.my
 # }}}
 
 # ## Functions {{{
-# Make directories, cd into the first one
-function md {
-    mkdir -p "$@" && cd "$1"
-
-}
-
 # Make directories, cd into the first one
 function md {
     mkdir -p "$@" && cd "$1"
