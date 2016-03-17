@@ -1,0 +1,49 @@
+[user]
+
+	name = Ben Stewart
+	email = benalanstewart@gmail.com
+
+[color]
+
+	diff = auto
+	status = auto
+	branch = auto
+
+[push]
+
+	default = simple
+
+[alias]
+
+	# Checkout and push to my repo
+	cob = "!f() { git checkout -b $1 && git push -u bastewart $1; } ; f $1"
+	co = checkout
+
+	# Update remotes and rebase
+	rb = "!f() { git remote update && git rebase $1; } ; f $1"
+	rbb = "!git rb bastewart/develop"
+	rbbm = "!git rb bastewart/master"
+	rbs = "!git rb scl/master"
+
+	# Undo and unstage last commit
+	undo = reset HEAD^ --mixed
+
+	# Unstage all changes since last commit
+	unstage = reset HEAD --mixed
+
+	last = log -1 HEAD
+	amend = commit --amend
+
+	# List git commits
+	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+	# ... with files changed
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	find = "!git ls-files | grep -i"
+
+	# List aliases
+	la = "!git config -l | grep alias | cut -c 7-"
+
+[core]
+	# Make `git rebase` safer on OS X
+	# More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+	trustctime = false
