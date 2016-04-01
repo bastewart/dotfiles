@@ -206,7 +206,11 @@ alias mysql-ca='ssl-mysql-aws "ca-production.cowdpj6qpfiw.us-east-1.rds.amazonaw
 function code-set-privileges {
     echo 'cd $HOME/repositories/admin/admin && SQL_ROOT="$(cat ~/.mysql-root)" fab set_privileges'
 }
-alias mysql-set-privileges="ssh scls1 '$(code-set-privileges)'"
+if [[ $osx = true ]]; then
+    alias mysql-set-privileges='(cd $HOME/Documents/repositories/admin/admin && fab set_privileges)'
+else
+    alias mysql-set-privileges='(cd $HOME/repositories/admin/admin && fab set_privileges)'
+fi
 
 alias mysqldump-bens='mysqldump -u bens --set-gtid-purged=OFF -p"$(cat $HOME/.mysql-passwd)"'
 
