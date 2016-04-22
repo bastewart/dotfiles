@@ -190,17 +190,15 @@ alias pass-update='pass git remote update && pass git rebase origin/master'
 
 
 # ### MySQL aliases{{{
-alias mysql='mysql -p"$(cat $HOME/.mysql-passwd)"'
-alias mysql-root='\mysql -u root -p"$(pass mysql/root)"'
+alias mysql-root-int='\mysql -uroot -h"internal-test-db.cowdpj6qpfiw.us-east-1.rds.amazonaws.com" -p"$(cat $HOME/aws/mysql-password)" --ssl-ca=$HOME/aws/rds-combined-ca-bundle.pem --ssl-verify-server-cert --port=3306'
+alias mysql-root-ca='\mysql -uroot -h"ca-production.cowdpj6qpfiw.us-east-1.rds.amazonaws.com" -p"$(cat $HOME/aws/mysql-password)" --ssl-ca=$HOME/aws/rds-combined-ca-bundle.pem --ssl-verify-server-cert --port=3306'
+alias mysql-ca='\mysql -ubens -h"ca-production.cowdpj6qpfiw.us-east-1.rds.amazonaws.com" -p"$(cat $HOME/.mysql-passwd)" --ssl-ca=$HOME/aws/rds-combined-ca-bundle.pem --ssl-verify-server-cert --port=3306'
 
-function ssl-mysql {
-    \mysql -uroot -h$1 -p"$(cat $2)" --ssl-ca=$3 --ssl-verify-server-cert --port=3306
-}
-function ssl-mysql-aws {
-    ssl-mysql $1 $HOME/aws/mysql-password $HOME/aws/rds-combined-ca-bundle.pem
-}
-alias mysql-int='ssl-mysql-aws "internal-test-db.cowdpj6qpfiw.us-east-1.rds.amazonaws.com"'
-alias mysql-ca='ssl-mysql-aws "ca-production.cowdpj6qpfiw.us-east-1.rds.amazonaws.com"'
+alias mysql='mysql -p"$(cat $HOME/.mysql-passwd)"'
+alias mysql-root='\mysql -uroot -p"$(cat $HOME/.mysql-root)"'
+
+alias mysql_show='mysql -e "SHOW PROCESSLIST"'
+alias mysql_sf='mysql -e "SHOW FULL PROCESSLIST"'
 
 # Update SQL privileges on SCLS1
 function code-set-privileges {
