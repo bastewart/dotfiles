@@ -183,7 +183,7 @@ fi
 alias tat="tmux new-session -A -s main"
 
 # Open bash_profile and source after editing
-alias bash-profile="vim $HOME/dotfiles/.bash_profile && source ~/.bash_profile"
+alias bash-profile="vim $HOME/dotfiles/.bash_profile && source $HOME/dotfiles/.bash_profile"
 
 # Update passwords store
 alias pass-update='pass git remote update && pass git rebase origin/master'
