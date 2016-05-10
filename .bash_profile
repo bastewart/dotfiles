@@ -23,7 +23,6 @@ fi
 
 # Set virtual envs
 source /usr/local/bin/virtualenvwrapper.sh
-WORKON_HOME=$HOME/.virtualenvs
 # Disable prompt, will set custom in PS1 below
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 workon develop
