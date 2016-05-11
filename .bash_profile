@@ -215,6 +215,11 @@ alias mysqldump-bens='mysqldump -u bens --set-gtid-purged=OFF -p"$(cat $HOME/.my
 # }}}
 
 # ## Functions {{{
+# clear pyc files recursively from a directory
+function rm-pyc {
+    find . -name \*.pyc -delete
+}
+
 # Make directories, cd into the first one
 function md {
     mkdir -p "$@" && cd "$1"
