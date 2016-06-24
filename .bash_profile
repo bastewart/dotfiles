@@ -193,7 +193,7 @@ alias mysql-root-int='\mysql -uroot -h"internal-test-db.cowdpj6qpfiw.us-east-1.r
 alias mysql-root-ca='\mysql -uroot -h"ca-production.cowdpj6qpfiw.us-east-1.rds.amazonaws.com" -p"$(cat $HOME/aws/mysql-password-ca)" --ssl-ca=$HOME/aws/rds-combined-ca-bundle.pem --ssl-verify-server-cert --port=3306'
 alias mysql-root-rnc='\mysql -uroot -h"rnc-db-cluster.cluster-cowdpj6qpfiw.us-east-1.rds.amazonaws.com" -p"$(cat $HOME/aws/mysql-password-rnc)" --port=3306'
 alias mysql-ca='\mysql -ubens -h"ca-production.cowdpj6qpfiw.us-east-1.rds.amazonaws.com" -p"$(cat $HOME/.mysql-passwd)" --port=3306  --ssl-ca=$HOME/aws/rds-combined-ca-bundle.pem --ssl-verify-server-cert '
-alias mysql-rnc='\mysql -ubens -h"rnc-db-cluster.cluster-cowdpj6qpfiw.us-east-1.rds.amazonaws.com" -p"$(cat $HOME/.mysql-passwd)"--port=3306'
+alias mysql-rnc='\mysql -ubens -h"rnc-db-cluster.cluster-cowdpj6qpfiw.us-east-1.rds.amazonaws.com" -p"$(cat $HOME/.mysql-passwd)" --port=3306'
 
 alias mysql='mysql -p"$(cat $HOME/.mysql-passwd)"'
 alias mysql-root='\mysql -uroot -p"$(cat $HOME/.mysql-root)"'
