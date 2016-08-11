@@ -238,6 +238,17 @@ function gz-dir {
     tar -zcf $1.tar.gz $1 && rm -r $1    
 }
 
+# Parallel compress directory
+function partar {
+    [ -z "$2" ] && echo "nprocs not set" && return 1
+
+    outname=$1.tar.gz
+    [ -f $outname ] &&  echo "$outname already exists" && return 1
+
+    size=$(du -sk $1 | cut -f 1)
+    tar -cf - $1 | pv -N $1 -perts ${size}k | pigz -6 -p $2 > $outname
+}
+
 
 # ### cd improvements {{{
 # Use pushd to preserve history. `cdm` displays a menu of previous dirs,
