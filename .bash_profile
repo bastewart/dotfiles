@@ -250,6 +250,16 @@ function partar {
 }
 
 
+# Tar a directory
+function dirtar {
+    outname=$1.tar
+    [ -f $outname ] &&  echo "$outname already exists" && return 1
+
+    size=$(du -sk $1 | cut -f 1)
+    tar -cf - $1 | pv -N $1 -perts ${size}k > $outname 
+}
+
+
 # ### cd improvements {{{
 # Use pushd to preserve history. `cdm` displays a menu of previous dirs,
 # Adapted from Pro Bash Programming - ISBN 978-1430219989
