@@ -242,7 +242,7 @@ function gz-dir {
 function partar {
     [ -z "$2" ] && echo "nprocs not set" && return 1
 
-    outname=$1.tar.gz
+    outname=${1%/}.tar.gz
     [ -f $outname ] &&  echo "$outname already exists" && return 1
 
     size=$(du -sk $1 | cut -f 1)
@@ -252,7 +252,7 @@ function partar {
 
 # Tar a directory
 function dirtar {
-    outname=$1.tar
+    outname=${1%/}.tar
     [ -f $outname ] &&  echo "$outname already exists" && return 1
 
     size=$(du -sk $1 | cut -f 1)
