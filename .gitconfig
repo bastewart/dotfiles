@@ -2,6 +2,7 @@
 
 	name = Ben Stewart
 	email = benalanstewart@gmail.com
+	signingkey = A491043D7C4CA5D9
 
 [color]
 
@@ -48,3 +49,5 @@
 	# Make `git rebase` safer on OS X
 	# More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
 	trustctime = false
+[commit]
+	gpgsign = true
