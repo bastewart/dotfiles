@@ -51,3 +51,5 @@
 	trustctime = false
 [commit]
 	gpgsign = true
+[tag]                                                                                 │
+    forcesignannotated = true
