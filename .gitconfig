@@ -54,6 +54,6 @@
 
     gpgsign = true
 
-[tag]                                                                                 │
+[tag]
 
     forcesignannotated = true
