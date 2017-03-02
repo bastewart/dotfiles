@@ -309,7 +309,7 @@ function cdm {
 
 # Written (probably badly) by Ben
 function last-dir {
-    for dir in $(dirs -p); do
+    for dir in $(dirs -p | uniq | tail -n +2); do
         [[ "$dir" = "${PWD//$HOME/~}" ]] && continue
         break
     done
