@@ -179,7 +179,7 @@ if [[ $osx = false ]]; then
 fi
 
 # Set tmux to open "main" automatically
-alias tat="tmux new-session -A -s main"
+alias tat='if [[ -n "$VIRTUAL_ENV" ]]; then deactivate; fi && tmux new-session -A -s main'
 
 # Open bash_profile and source after editing
 alias bash-profile="vim $HOME/dotfiles/.bash_profile && source $HOME/dotfiles/.bash_profile"
