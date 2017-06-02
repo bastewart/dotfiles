@@ -37,6 +37,11 @@ else
 fi
 complete -cf sudo
 
+# Autocomplete for exercism
+if [ -f ~/.config/exercism/exercism_completion.bash ]; then
+  . ~/.config/exercism/exercism_completion.bash
+fi
+
 # From https://www.reddit.com/r/linux/comments/zgqre/post_your_custom_ps1s/
 NONE='\033[0m'     # unsets color to term's fg color
 # dark colors
