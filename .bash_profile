@@ -1,6 +1,6 @@
 
 # From https://github.com/halhen/dotfiles/blob/master/.bashrc
-# Most of the alises here are from there 
+# Most of the alises here are from there
 # Stop executing if this is not an interactive session.
 [ -z "$PS1" ] && return
 
@@ -200,8 +200,8 @@ alias mysql-root-rnc='\mysql -uroot -h"rnc-db-cluster.cluster-cowdpj6qpfiw.us-ea
 alias mysql-ca='\mysql -ubens -h"ca-production.cowdpj6qpfiw.us-east-1.rds.amazonaws.com" -p"$(cat $HOME/.mysql-passwd)" --port=3306  --ssl-ca=$HOME/aws/rds-combined-ca-bundle.pem --ssl-verify-server-cert '
 alias mysql-rnc='\mysql -ubens -h"rnc-db-cluster.cluster-cowdpj6qpfiw.us-east-1.rds.amazonaws.com" -p"$(cat $HOME/.mysql-passwd)" --port=3306'
 
-alias mysql='mysql -p"$(cat $HOME/.mysql-passwd)"'
-alias mysql-root='\mysql -uroot -p"$(cat $HOME/.mysql-root)"'
+alias mysql='mysql -p"$(cat $HOME/.mysql-passwd)" -P3350 -h"127.0.0.1"'
+alias mysql-root='\mysql -uroot -p"$(cat $HOME/.mysql-root)" -P3350 -h"127.0.0.1"'
 
 alias mysql_show='mysql -e "SHOW PROCESSLIST"'
 alias mysql_sf='mysql -e "SHOW FULL PROCESSLIST"'
@@ -240,7 +240,7 @@ function k {
 
 # Compress directory and delete after
 function gz-dir {
-    tar -zcf $1.tar.gz $1 && rm -r $1    
+    tar -zcf $1.tar.gz $1 && rm -r $1
 }
 
 # Parallel compress directory
@@ -261,7 +261,7 @@ function dirtar {
     [ -f $outname ] &&  echo "$outname already exists" && return 1
 
     size=$(du -sk $1 | cut -f 1)
-    tar -cf - $1 | pv -N $1 -perts ${size}k > $outname 
+    tar -cf - $1 | pv -N $1 -perts ${size}k > $outname
 }
 
 
@@ -272,7 +272,7 @@ function dirtar {
 # cd with history - i.e. pushd
 function cd {
     local dir error
-    
+
     while :; do # No support for options, consume them
         case $1 in
             --) break ;;
@@ -303,10 +303,10 @@ function cdm {
     done
 
     [[ -z "${item[@]}" ]] && return
-    echo 
+    echo
     select i in "${item[@]}"; do
         if [[ "$i" ]]; then
-            cd "${i//\~/$HOME}" 
+            cd "${i//\~/$HOME}"
             return $?
         fi
     done
@@ -319,7 +319,7 @@ function last-dir {
         break
     done
 
-    cd "${dir//\~/$HOME}" 
+    cd "${dir//\~/$HOME}"
 }
 
 # Easier navigation: .., ..., ...., ....., ~ and -
