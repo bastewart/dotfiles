@@ -22,7 +22,11 @@ else
 fi
 
 # Set virtual envs
-source /usr/local/bin/virtualenvwrapper.sh
+if [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
+  source /usr/local/bin/virtualenvwrapper.sh;
+elif [[ -f /usr/share/virtualenvwrapper/virtualenvwrapper.sh ]]; then
+  source /usr/share/virtualenvwrapper/virtualenvwrapper.sh;
+fi 
 # Disable prompt, will set custom in PS1 below
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 workon develop
