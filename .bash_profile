@@ -21,12 +21,6 @@ else
     osx=false
 fi
 
-# Set virtual envs
-if [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
-  source /usr/local/bin/virtualenvwrapper.sh;
-elif [[ -f /usr/share/virtualenvwrapper/virtualenvwrapper.sh ]]; then
-  source /usr/share/virtualenvwrapper/virtualenvwrapper.sh;
-fi 
 # Disable prompt, will set custom in PS1 below
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 workon develop
@@ -40,11 +34,6 @@ else
     . /etc/bash_completion
 fi
 complete -cf sudo
-
-# Autocomplete for exercism
-if [ -f ~/.config/exercism/exercism_completion.bash ]; then
-  . ~/.config/exercism/exercism_completion.bash
-fi
 
 # From https://www.reddit.com/r/linux/comments/zgqre/post_your_custom_ps1s/
 NONE='\033[0m'     # unsets color to term's fg color
@@ -197,44 +186,10 @@ alias bash-profile="vim $HOME/dotfiles/.bash_profile && source $HOME/dotfiles/.b
 alias pass-update='pass git remote update && pass git rebase origin/master'
 
 
-# ### MySQL aliases{{{
-alias mysql-root-int='\mysql -uroot -h"internal-test-db.cowdpj6qpfiw.us-east-1.rds.amazonaws.com" -p"$(cat $HOME/aws/mysql-password-ca)" --ssl-ca=$HOME/aws/rds-combined-ca-bundle.pem --ssl-verify-server-cert --port=3306'
-alias mysql-root-ca='\mysql -uroot -h"ca-production.cowdpj6qpfiw.us-east-1.rds.amazonaws.com" -p"$(cat $HOME/aws/mysql-password-ca)" --ssl-ca=$HOME/aws/rds-combined-ca-bundle.pem --ssl-verify-server-cert --port=3306'
-alias mysql-root-rnc='\mysql -uroot -h"rnc-db-cluster.cluster-cowdpj6qpfiw.us-east-1.rds.amazonaws.com" -p"$(cat $HOME/aws/mysql-password-rnc)" --port=3306'
-alias mysql-ca='\mysql -ubens -h"ca-production.cowdpj6qpfiw.us-east-1.rds.amazonaws.com" -p"$(cat $HOME/.mysql-passwd)" --port=3306  --ssl-ca=$HOME/aws/rds-combined-ca-bundle.pem --ssl-verify-server-cert '
-alias mysql-rnc='\mysql -ubens -h"rnc-db-cluster.cluster-cowdpj6qpfiw.us-east-1.rds.amazonaws.com" -p"$(cat $HOME/.mysql-passwd)" --port=3306'
-
-alias mysql='mysql -p"$(cat $HOME/.mysql-passwd)" -P3350 -h"127.0.0.1"'
-alias mysql-root='\mysql -uroot -p"$(cat $HOME/.mysql-root)" -P3350 -h"127.0.0.1"'
-
-alias mysql_show='mysql -e "SHOW PROCESSLIST"'
-alias mysql_sf='mysql -e "SHOW FULL PROCESSLIST"'
-
-# Update SQL privileges on SCLS1
-function code-set-privileges {
-    echo 'cd $HOME/repositories/admin/admin && SQL_ROOT="$(cat ~/.mysql-root)" fab set_privileges'
-}
-if [[ $osx = true ]]; then
-    alias mysql-set-privileges='(cd $HOME/Documents/repositories/admin/admin && fab set_privileges)'
-else
-    alias mysql-set-privileges='(cd $HOME/repositories/admin/admin && fab set_privileges)'
-fi
-
-alias mysqldump-bens='mysqldump -u bens --set-gtid-purged=OFF -p"$(cat $HOME/.mysql-passwd)"'
-
-# }}}
-# }}}
-
 # ## Functions {{{
-# clear pyc files recursively from a directory
-function rm-pyc {
-    find . -name \*.pyc -delete
-}
-
 # Make directories, cd into the first one
 function md {
     mkdir -p "$@" && cd "$1"
-
 }
 
 # Search man pages for user commands
