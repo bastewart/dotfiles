@@ -23,7 +23,6 @@ fi
 
 # Disable prompt, will set custom in PS1 below
 export VIRTUAL_ENV_DISABLE_PROMPT=1
-workon develop
 
 # ## Command entry {{{
 # (Ben) Added brew for OSX use
