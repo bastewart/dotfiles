@@ -27,11 +27,11 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 # ## Command entry {{{
 # (Ben) Added brew for OSX use
 # Use [bash completion](http://freshmeat.net/projects/bashcompletion), also with sudo completion.
-if [[ $osx = true ]]; then
-    . $(brew --prefix)/etc/bash_completion
-else
-    . /etc/bash_completion
-fi
+if [[ $osx = true ]] && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
+    source "$(brew --prefix)/share/bash-completion/bash_completion";
+elif [ -f /etc/bash_completion ]; then
+    source /etc/bash_completion;
+fi;
 complete -cf sudo
 
 # From https://www.reddit.com/r/linux/comments/zgqre/post_your_custom_ps1s/
