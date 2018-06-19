@@ -12,3 +12,5 @@ function docker-start-postgres {
     -v ~/state/postgres:/var/lib/postgresql/data \
     -d postgres:9.6.4
 }
+
+source ~/.permutive-secrets
