@@ -13,4 +13,6 @@ function docker-start-postgres {
     -d postgres:9.6.4
 }
 
+alias port-forward-management='kubectl port-forward -n permutive svc/management-service 9001:80'
+
 source ~/.permutive-secrets
