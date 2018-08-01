@@ -1,7 +1,12 @@
+#!/usr/bin/env bash
+
+# shellcheck source=/dev/null
+source ~/.permutive-secrets
+
 function docker-stopall {
     if [[ $(docker ps -q | wc -l) -gt 0 ]]; then
-        docker stop $(docker ps -q) > /dev/null;
-    fi    
+        docker stop "$(docker ps -q)" > /dev/null;
+    fi
 }
 
 function docker-start-postgres {
@@ -14,5 +19,3 @@ function docker-start-postgres {
 }
 
 alias port-forward-management='kubectl port-forward -n permutive svc/management-service 9001:80'
-
-source ~/.permutive-secrets

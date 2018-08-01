@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 
 # From https://github.com/halhen/dotfiles/blob/master/.bashrc
 # Most of the alises here are from there
@@ -28,8 +29,10 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 # (Ben) Added brew for OSX use
 # Use [bash completion](http://freshmeat.net/projects/bashcompletion), also with sudo completion.
 if [[ $osx = true ]] && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
+    # shellcheck source=/dev/null
     source "$(brew --prefix)/share/bash-completion/bash_completion";
 elif [ -f /etc/bash_completion ]; then
+    # shellcheck source=/dev/null
     source /etc/bash_completion;
 fi;
 complete -cf sudo
@@ -198,7 +201,7 @@ function k {
 
 # Compress directory and delete after
 function gz-dir {
-    tar -zcf $1.tar.gz $1 && rm -r $1
+    tar -zcf "$1.tar.gz" "$1" && rm -r "$1"
 }
 
 # Parallel compress directory
@@ -206,20 +209,20 @@ function partar {
     [ -z "$2" ] && echo "nprocs not set" && return 1
 
     outname=${1%/}.tar.gz
-    [ -f $outname ] &&  echo "$outname already exists" && return 1
+    [ -f "$outname" ] &&  echo "$outname already exists" && return 1
 
     size=$(du -sk $1 | cut -f 1)
-    tar -cf - $1 | pv -N $1 -perts ${size}k | pigz -6 -p $2 > $outname
+    tar -cf - "$1" | pv -N "$1" -perts "${size}k" | pigz -6 -p "$2" > "$outname"
 }
 
 
 # Tar a directory
 function dirtar {
     outname=${1%/}.tar
-    [ -f $outname ] &&  echo "$outname already exists" && return 1
+    [ -f "$outname" ] &&  echo "$outname already exists" && return 1
 
-    size=$(du -sk $1 | cut -f 1)
-    tar -cf - $1 | pv -N $1 -perts ${size}k > $outname
+    size=$(du -sk "$1" | cut -f 1)
+    tar -cf - "$1" | pv -N "$1" -perts "${size}k" > "$outname"
 }
 
 
@@ -293,10 +296,13 @@ alias -- -="last-dir"
 # }}}
 
 # The next line updates PATH for the Google Cloud SDK.
+# shellcheck source=/dev/null
 if [ -f ~/google-cloud-sdk/path.bash.inc ]; then source ~/google-cloud-sdk/path.bash.inc; fi
 
 # The next line enables shell command completion for gcloud.
+# shellcheck source=/dev/null
 if [ -f ~/google-cloud-sdk/completion.bash.inc ]; then source ~/google-cloud-sdk/completion.bash.inc; fi
 
+# shellcheck source=/dev/null
 source ~/.permutive
 
