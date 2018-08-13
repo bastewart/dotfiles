@@ -190,22 +190,22 @@ alias pass-update='pass git remote update && pass git rebase origin/master'
 
 # ## Functions {{{
 # Make directories, cd into the first one
-function md {
+md() {
     mkdir -p "$@" && cd "$1"
 }
 
 # Search man pages for user commands
-function k {
+k() {
     man -k "$@" | grep '(1' --color=never
 }
 
 # Compress directory and delete after
-function gz-dir {
+gz-dir() {
     tar -zcf "$1.tar.gz" "$1" && rm -r "$1"
 }
 
 # Parallel compress directory
-function partar {
+partar() {
     [ -z "$2" ] && echo "nprocs not set" && return 1
 
     outname=${1%/}.tar.gz
@@ -217,7 +217,7 @@ function partar {
 
 
 # Tar a directory
-function dirtar {
+dirtar() {
     outname=${1%/}.tar
     [ -f "$outname" ] &&  echo "$outname already exists" && return 1
 
@@ -231,7 +231,7 @@ function dirtar {
 # Adapted from Pro Bash Programming - ISBN 978-1430219989
 
 # cd with history - i.e. pushd
-function cd {
+cd() {
     local dir error
 
     while :; do # No support for options, consume them
@@ -252,7 +252,7 @@ function cd {
 } >/dev/null
 
 # cd by menu, with previous directories as options
-function cdm {
+cdm() {
     local dir IFS=$'\n' item n
 
     for dir in $(dirs -p); do
@@ -274,7 +274,7 @@ function cdm {
 }
 
 # Written (probably badly) by Ben
-function last-dir {
+last-dir() {
     for dir in $(dirs -p | uniq | tail -n +2); do
         [[ "$dir" = "${PWD//$HOME/~}" ]] && continue
         break
