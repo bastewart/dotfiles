@@ -18,4 +18,22 @@ docker-start-postgres() {
     -d postgres:9.6.4
 }
 
+docker-find() {
+	[[ -z "$1" ]] &&  >&2 echo "name to find not set" && return 1
+
+	docker ps | grep "$1" | awk '{print $1}'
+}
+
+docker-bash() {
+    [[ -z "$1" ]] && echo >&2 "container not set" && return 1
+
+    docker exec -it "$1" /bin/bash
+}
+
+docker-bash-find() {
+    container="$(docker-find "$1")" || return 1
+
+    docker exec -it "$container" /bin/bash
+}
+
 alias port-forward-management='kubectl port-forward -n permutive svc/management-service 9001:80'
