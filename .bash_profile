@@ -18,6 +18,8 @@ if [[ $(uname) == "Darwin" ]]; then
 
     # Setting memory use limits?
     ulimit -S -n 2048
+
+    export JAVA_HOME=$(/usr/libexec/java_home)
 else
     osx=false
 fi
