@@ -189,6 +189,11 @@ alias bash-profile="vim $HOME/dotfiles/.bash_profile && source $HOME/dotfiles/.b
 # Update passwords store
 alias pass-update='pass git remote update && pass git rebase origin/master'
 
+# Alias envsubst on OSX which is installed as keg-only
+
+if [[ $osx = true ]]; then
+    alias envsubst='/usr/local/opt/gettext/bin/envsubst';
+fi
 
 # ## Functions {{{
 # Make directories, cd into the first one
