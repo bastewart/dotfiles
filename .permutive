@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 # shellcheck source=/dev/null
-source ~/.permutive-secrets
+if [[ -f ~/.permutive-secrets ]]; then
+    source ~/.permutive-secrets;
+fi
 
 docker-stopall() {
     if [[ $(docker ps -q | wc -l) -gt 0 ]]; then

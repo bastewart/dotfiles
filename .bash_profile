@@ -30,9 +30,15 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 # ## Command entry {{{
 # (Ben) Added brew for OSX use
 # Use [bash completion](http://freshmeat.net/projects/bashcompletion), also with sudo completion.
-if [[ $osx = true ]] && [ -f "$(brew --prefix)/share/bash-completion/bash_completion" ]; then
+OSX_BASH_PATH="$(brew --prefix)/etc/profile.d/bash_completion.sh"
+if [[ $osx = true ]] && [[ -f $OSX_BASH_PATH ]]; then
     # shellcheck source=/dev/null
-    source "$(brew --prefix)/share/bash-completion/bash_completion";
+    source $OSX_BASH_PATH;
+
+# Old directory for completion to be installed
+for completion in "$(brew --prefix)/etc/bash_completion.d/"*; do
+    source $completion;
+done
 elif [ -f /etc/bash_completion ]; then
     # shellcheck source=/dev/null
     source /etc/bash_completion;
@@ -311,5 +317,4 @@ if [ -f ~/google-cloud-sdk/path.bash.inc ]; then source ~/google-cloud-sdk/path.
 if [ -f ~/google-cloud-sdk/completion.bash.inc ]; then source ~/google-cloud-sdk/completion.bash.inc; fi
 
 # shellcheck source=/dev/null
-source ~/.permutive
-
+source ~/.permutive;
