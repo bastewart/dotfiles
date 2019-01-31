@@ -8,7 +8,7 @@ git pull origin master;
 
 function doIt() {
     rsync --exclude ".git/" --exclude ".DS_Store" --exclude "bootstrap.sh" \
-        --exclude ".gitignore" -avh --no-perms . ~;
+        --exclude ".gitignore" --exclude "misc" -avh --no-perms . ~;
     source ~/.bash_profile;
 }
 
