@@ -45,6 +45,9 @@ elif [ -f /etc/bash_completion ]; then
 fi;
 complete -cf sudo
 
+# Source sdkman otherwise `sdk` is not found as a command
+[[ -f "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
 # From https://www.reddit.com/r/linux/comments/zgqre/post_your_custom_ps1s/
 NONE='\033[0m'     # unsets color to term's fg color
 # dark colors
